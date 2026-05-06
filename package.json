@@ -1,0 +1,6 @@
+{
+  "name": "mini-tools",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A small collection of graphic web tools. No build step — each /tools/<name>/index.html is self-contained, deployed as static to Vercel."
+}

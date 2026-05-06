@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mini-tools</title>
+  <meta name="description" content="A small collection of graphic web tools." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">mini-tools</span>
+    </a>
+    <p class="tagline">A small collection of graphic web tools.</p>
+  </header>
+
+  <main class="gallery" id="gallery">
+    <p class="empty" id="empty-state">No tools yet. Drop a folder into <code>/tools/</code> and add an entry to <code>tools.json</code>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span></span>
+  </footer>
+
+  <template id="card-tpl">
+    <a class="card" href="">
+      <div class="card-thumb">
+        <span class="card-thumb-fallback"></span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title"></h2>
+        <p class="card-desc"></p>
+      </div>
+    </a>
+  </template>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    fetch('/tools.json', { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(data => render(data.tools || []))
+      .catch(() => render([]));
+
+    function render(tools) {
+      const gallery = document.getElementById('gallery');
+      const empty = document.getElementById('empty-state');
+      if (!tools.length) { empty.hidden = false; return; }
+      empty.hidden = true;
+      const tpl = document.getElementById('card-tpl');
+      const frag = document.createDocumentFragment();
+      for (const t of tools) {
+        const node = tpl.content.firstElementChild.cloneNode(true);
+        node.href = t.path;
+        node.querySelector('.card-title').textContent = t.name;
+        node.querySelector('.card-desc').textContent = t.description || '';
+        const thumb = node.querySelector('.card-thumb');
+        const fallback = node.querySelector('.card-thumb-fallback');
+        if (t.thumbnail) {
+          const img = document.createElement('img');
+          img.src = t.thumbnail;
+          img.alt = '';
+          img.loading = 'lazy';
+          thumb.replaceChildren(img);
+        } else {
+          fallback.textContent = (t.name || '?').slice(0, 1).toUpperCase();
+        }
+        frag.appendChild(node);
+      }
+      gallery.appendChild(frag);
+    }
+  </script>
+</body>
+</html>
