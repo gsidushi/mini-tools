@@ -1,3 +1,9 @@
 {
-  "tools": []
+  "tools": [
+    {
+      "name": "Pixel Gradient",
+      "description": "Animated gradients with smart pixel overlays — each pixel is itself a gradient.",
+      "path": "/tools/pixel-gradient/"
+    }
+  ]
 }
