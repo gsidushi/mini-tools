@@ -11,7 +11,6 @@
     .tool-shell {
       display: grid;
       grid-template-columns: 1fr var(--panel-w);
-      gap: 0;
       height: 100vh;
       min-height: 100vh;
     }
@@ -23,16 +22,11 @@
         linear-gradient(45deg, transparent 75%, var(--line) 75%) 8px -8px / 16px 16px,
         linear-gradient(-45deg, transparent 75%, var(--line) 75%) 8px 0 / 16px 16px,
         var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 28px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; padding: 28px;
     }
     .stage canvas {
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
+      max-width: 100%; max-height: 100%; display: block;
       border-radius: 4px;
       box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.08);
     }
@@ -41,224 +35,113 @@
       background: var(--card);
       overflow-y: auto;
       padding: 18px 18px 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      display: flex; flex-direction: column; gap: 18px;
     }
     .panel-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 12px; border-bottom: 1px solid var(--line);
     }
     .panel-head .back { font-size: 12px; color: var(--muted); }
     .panel-head .back:hover { color: var(--ink); }
     .panel-head h1 { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
 
-    .group { display: flex; flex-direction: column; gap: 10px; }
+    .group { display: flex; flex-direction: column; gap: 12px; }
     .group-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 10px;
-    }
-    .row label { font-size: 12.5px; color: var(--ink); }
-    .row .val {
-      font-size: 11.5px;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-      min-width: 42px;
-      text-align: right;
-    }
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--ink);
-    }
-    .seg {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .seg button {
-      background: transparent;
-      border: 0;
-      padding: 8px;
-      font-size: 12px;
-      cursor: pointer;
-      color: var(--muted);
-      font-family: inherit;
-    }
-    .seg button[aria-pressed="true"] {
-      background: var(--ink);
-      color: var(--bg);
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); font-weight: 600;
     }
 
-    /* Color picker UI */
-    .palette-list { display: flex; flex-direction: column; gap: 6px; }
-    .palette-row {
-      display: grid;
-      grid-template-columns: 28px 1fr 22px;
-      align-items: center;
-      gap: 8px;
+    /* Generated numeric control */
+    .ctrl { display: flex; flex-direction: column; gap: 6px; }
+    .ctrl-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .ctrl-head label { font-size: 12.5px; color: var(--ink); }
+    .num-wrap { display: inline-flex; align-items: center; gap: 3px; }
+    .ctrl input[type="number"] {
+      width: 62px; padding: 4px 6px;
+      border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+      border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11.5px; text-align: right;
+      -moz-appearance: textfield;
     }
+    .ctrl input[type="number"]:focus { outline: none; border-color: var(--ink); }
+    .num-suffix { font-size: 11px; color: var(--muted); min-width: 8px; }
+    .ctrl input[type="range"] { width: 100%; accent-color: var(--ink); }
+
+    .seg {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    }
+    .seg button {
+      background: transparent; border: 0; padding: 8px;
+      font-size: 12px; cursor: pointer; color: var(--muted); font-family: inherit;
+    }
+    .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+    /* Color picker */
+    .palette-list { display: flex; flex-direction: column; gap: 6px; }
+    .palette-row { display: grid; grid-template-columns: 28px 1fr 22px; align-items: center; gap: 8px; }
     .swatch-sm {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      border: 1px solid var(--line);
-      position: relative;
-      cursor: pointer;
-      overflow: hidden;
+      width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--line);
+      position: relative; cursor: pointer; overflow: hidden;
     }
     .swatch-sm input[type="color"] {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-      border: 0;
-      padding: 0;
+      position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0;
     }
     .hex-input {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 12px;
-      padding: 6px 8px;
-      border: 1px solid var(--line);
-      background: var(--bg);
-      color: var(--ink);
-      border-radius: 6px;
-      width: 100%;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+      padding: 6px 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+      border-radius: 6px; width: 100%; text-transform: uppercase; letter-spacing: 0.04em;
     }
     .hex-input:focus { outline: none; border-color: var(--ink); }
     .rm {
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      color: var(--muted);
-      font-size: 14px;
-      cursor: pointer;
-      height: 28px;
-      font-family: inherit;
-      padding: 0;
+      background: transparent; border: 1px solid var(--line); border-radius: 6px;
+      color: var(--muted); font-size: 14px; cursor: pointer; height: 28px; font-family: inherit; padding: 0;
     }
     .rm:hover:not(:disabled) { color: var(--ink); border-color: var(--ink); }
     .rm:disabled { opacity: 0.3; cursor: not-allowed; }
-
     .add-color {
-      background: transparent;
-      border: 1px dashed var(--line);
-      border-radius: 6px;
-      padding: 8px;
-      font-size: 12px;
-      color: var(--muted);
-      cursor: pointer;
-      font-family: inherit;
+      background: transparent; border: 1px dashed var(--line); border-radius: 6px;
+      padding: 8px; font-size: 12px; color: var(--muted); cursor: pointer; font-family: inherit;
     }
-    .add-color:hover { color: var(--ink); border-color: var(--ink); }
+    .add-color:hover:not(:disabled) { color: var(--ink); border-color: var(--ink); }
     .add-color:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* Image uploader */
     .file-drop {
-      border: 1px dashed var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      text-align: center;
-      font-size: 12.5px;
-      color: var(--muted);
-      cursor: pointer;
-      transition: border-color 120ms, color 120ms;
-      display: block;
+      border: 1px dashed var(--line); border-radius: 8px; padding: 18px;
+      text-align: center; font-size: 12.5px; color: var(--muted); cursor: pointer;
+      transition: border-color 120ms, color 120ms; display: block;
     }
-    .file-drop:hover, .file-drop.is-drag {
-      border-color: var(--ink);
-      color: var(--ink);
-    }
+    .file-drop:hover, .file-drop.is-drag { border-color: var(--ink); color: var(--ink); }
     .file-drop input { display: none; }
     .file-preview {
-      margin-top: 8px;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      aspect-ratio: 16/9;
-      background: var(--bg);
-      display: none;
+      margin-top: 8px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line);
+      aspect-ratio: 16/9; background: var(--bg); display: none;
     }
     .file-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .file-preview.is-set { display: block; }
 
-    .btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     button.btn {
-      background: var(--ink);
-      color: var(--bg);
-      border: 0;
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: inherit;
+      background: var(--ink); color: var(--bg); border: 0; padding: 10px 12px;
+      border-radius: 8px; font-size: 12.5px; font-weight: 500; cursor: pointer; font-family: inherit;
     }
-    button.btn.ghost {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--line);
-    }
+    button.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
     button.btn:hover { opacity: 0.88; }
     select {
-      width: 100%;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: var(--bg);
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 12.5px;
+      width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--ink); font-family: inherit; font-size: 12.5px;
     }
+    .field-label { font-size: 12.5px; color: var(--ink); margin-bottom: 6px; display: block; }
 
-    /* Toggle */
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .toggle-row label { font-size: 12.5px; }
     .switch {
-      position: relative;
-      width: 34px;
-      height: 20px;
-      border-radius: 999px;
-      background: var(--line);
-      cursor: pointer;
-      transition: background 150ms;
+      position: relative; width: 34px; height: 20px; border-radius: 999px;
+      background: var(--line); cursor: pointer; transition: background 150ms; flex: none;
     }
     .switch::after {
-      content: "";
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--bg);
-      transition: transform 150ms;
+      content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--bg); transition: transform 150ms;
     }
     .switch.on { background: var(--ink); }
     .switch.on::after { transform: translateX(14px); }
@@ -288,12 +171,10 @@
           <button id="src-palette" aria-pressed="true">Palette</button>
           <button id="src-image" aria-pressed="false">Image</button>
         </div>
-
         <div id="palette-ui">
           <div class="palette-list" id="palette-list"></div>
           <button class="add-color" id="add-color">+ Add color</button>
         </div>
-
         <div id="image-ui" hidden>
           <label class="file-drop" id="file-drop">
             Click or drop an image
@@ -304,52 +185,39 @@
       </div>
 
       <div class="group">
-        <div class="group-title">Layout</div>
-        <div class="row"><label>Region</label></div>
-        <select id="region">
-          <option value="full" selected>Full grid</option>
-          <option value="square">Centered square</option>
-          <option value="disc">Centered disc</option>
-        </select>
-
-        <div class="row"><label>Region size</label><span class="val" id="v-region-size">0.70</span></div>
-        <input type="range" id="region-size" min="0.2" max="1" step="0.01" value="0.7" />
-
-        <div class="row"><label>Density</label><span class="val" id="v-density">1.00</span></div>
-        <input type="range" id="density" min="0.2" max="1" step="0.01" value="1" />
+        <div class="group-title">Grid</div>
+        <div id="g-grid"></div>
+        <div>
+          <label class="field-label" for="region">Region</label>
+          <select id="region">
+            <option value="full" selected>Full grid</option>
+            <option value="square">Centered square</option>
+            <option value="disc">Centered disc</option>
+          </select>
+        </div>
       </div>
 
       <div class="group">
-        <div class="group-title">Pixels</div>
-        <div class="row"><label>Cell size</label><span class="val" id="v-cell">42</span></div>
-        <input type="range" id="cell" min="8" max="120" value="42" />
+        <div class="group-title">Pixel gradient</div>
+        <div id="g-pixgrad"></div>
+      </div>
 
-        <div class="row"><label>Layers</label><span class="val" id="v-layers">3</span></div>
-        <input type="range" id="layers" min="1" max="5" step="1" value="3" />
-
-        <div class="row"><label>Pixel opacity</label><span class="val" id="v-alpha">0.55</span></div>
-        <input type="range" id="alpha" min="0.1" max="1" step="0.01" value="0.55" />
-
-        <div class="row"><label>Pixel angle</label><span class="val" id="v-angle">45°</span></div>
-        <input type="range" id="angle" min="0" max="360" step="1" value="45" />
+      <div class="group">
+        <div class="group-title">Source visibility</div>
+        <div id="g-vis"></div>
       </div>
 
       <div class="group">
         <div class="group-title">Motion</div>
-
-        <div class="row"><label>Base motion</label></div>
-        <select id="base-motion">
-          <option value="radial" selected>Radial drift</option>
-          <option value="orbit">Orbit</option>
-          <option value="static">Static</option>
-        </select>
-
-        <div class="row"><label>Base speed</label><span class="val" id="v-speed">0.40</span></div>
-        <input type="range" id="speed" min="0" max="2" step="0.01" value="0.4" />
-
-        <div class="row"><label>Pixel rotation</label><span class="val" id="v-pixel-rot">0.00</span></div>
-        <input type="range" id="pixel-rot" min="0" max="2" step="0.01" value="0" />
-
+        <div>
+          <label class="field-label" for="base-motion">Base motion</label>
+          <select id="base-motion">
+            <option value="radial" selected>Radial drift</option>
+            <option value="orbit">Orbit</option>
+            <option value="static">Static</option>
+          </select>
+        </div>
+        <div id="g-motion"></div>
         <div id="image-motion-row" hidden>
           <div class="toggle-row">
             <label for="image-motion">Image motion</label>
@@ -360,20 +228,17 @@
 
       <div class="group">
         <div class="group-title">Finish</div>
-        <div class="row"><label>Softness</label><span class="val" id="v-soft">0.70</span></div>
-        <input type="range" id="soft" min="0.2" max="1.4" step="0.01" value="0.7" />
-
-        <div class="row"><label>Grain</label><span class="val" id="v-grain">0.25</span></div>
-        <input type="range" id="grain" min="0" max="1" step="0.01" value="0.25" />
-
-        <div class="row"><label>Aspect</label></div>
-        <select id="aspect">
-          <option value="1:1" selected>1:1 — Square</option>
-          <option value="4:5">4:5 — Portrait</option>
-          <option value="9:16">9:16 — Story</option>
-          <option value="16:9">16:9 — Landscape</option>
-          <option value="3:4">3:4</option>
-        </select>
+        <div id="g-finish"></div>
+        <div>
+          <label class="field-label" for="aspect">Aspect</label>
+          <select id="aspect">
+            <option value="1:1" selected>1:1 — Square</option>
+            <option value="4:5">4:5 — Portrait</option>
+            <option value="9:16">9:16 — Story</option>
+            <option value="16:9">16:9 — Landscape</option>
+            <option value="3:4">3:4</option>
+          </select>
+        </div>
       </div>
 
       <div class="btn-row">
@@ -394,120 +259,137 @@
       source: 'palette',
       palette: ['#FFF1E0', '#F8C4D8', '#FF6B9D', '#FF8A3D', '#FFE45C'],
       image: null,
+      // grid
+      cell: 42,
+      density: 1.0,
       region: 'full',
       regionSize: 0.7,
-      density: 1.0,
-      cell: 42,
-      layers: 3,
-      alpha: 0.55,
-      pixelAngle: 45,
+      // pixel gradient
+      gradStrength: 0.6,
+      gradContrast: 1.2,
+      gradDirection: 45,
+      alpha: 0.7,
+      // source visibility
+      imageBlur: 8,
+      backdrop: 0.0,
+      softness: 0.7,
+      // motion
       baseMotion: 'radial',
       speed: 0.4,
       pixelRotation: 0,
       imageMotion: false,
-      soft: 0.7,
+      // finish
       grain: 0.25,
       aspect: '1:1',
       seed: Math.floor(Math.random() * 1e6),
     };
 
-    function mulberry32(a) {
-      return function() {
-        a |= 0; a = a + 0x6D2B79F5 | 0;
-        let t = a;
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    // ── Generic numeric control (slider + editable number) ────
+    function makeControl(parent, cfg) {
+      const { key, label, min, max, step, decimals = 2, suffix = '' } = cfg;
+      const wrap = document.createElement('div');
+      wrap.className = 'ctrl';
+      wrap.innerHTML = `
+        <div class="ctrl-head">
+          <label>${label}</label>
+          <span class="num-wrap">
+            <input type="number" min="${min}" max="${max}" step="${step}" />
+            <span class="num-suffix">${suffix}</span>
+          </span>
+        </div>
+        <input type="range" min="${min}" max="${max}" step="${step}" />`;
+      const num = wrap.querySelector('input[type="number"]');
+      const range = wrap.querySelector('input[type="range"]');
+      const fmt = v => decimals > 0 ? Number(v).toFixed(decimals) : String(Math.round(v));
+      const clamp = v => Math.min(max, Math.max(min, v));
+
+      const set = (v, src) => {
+        if (isNaN(v)) return;
+        v = clamp(v);
+        state[key] = v;
+        if (src !== 'range') range.value = v;
+        if (src !== 'num') num.value = fmt(v);
       };
-    }
+      range.addEventListener('input', e => set(parseFloat(e.target.value), 'range'));
+      // While typing leave the field alone; clamp/format on blur or Enter
+      num.addEventListener('input', e => {
+        const v = parseFloat(e.target.value);
+        if (!isNaN(v)) { state[key] = clamp(v); range.value = clamp(v); }
+      });
+      num.addEventListener('blur', () => set(parseFloat(num.value), null));
+      num.addEventListener('keydown', e => { if (e.key === 'Enter') { set(parseFloat(num.value), null); num.blur(); } });
 
-    function resize() {
-      const [a, b] = state.aspect.split(':').map(Number);
-      const long = 1200;
-      const w = a >= b ? long : Math.round(long * a / b);
-      const h = b > a ? long : Math.round(long * b / a);
-      canvas.width = w; canvas.height = h;
-      base.width = Math.round(w / 2);
-      base.height = Math.round(h / 2);
-      grainCanvas = null; // invalidate
+      set(state[key], null);
+      // expose a refresh hook so Randomize/resets can re-sync the UI
+      controls[key] = (v) => set(v ?? state[key], null);
+      parent.appendChild(wrap);
     }
+    const controls = {};
 
-    // ── Color picker UI ──────────────────────────────────────
+    makeControl(document.getElementById('g-grid'), { key: 'cell', label: 'Cell size', min: 6, max: 160, step: 1, decimals: 0, suffix: 'px' });
+    makeControl(document.getElementById('g-grid'), { key: 'density', label: 'Density', min: 0.1, max: 1, step: 0.01 });
+    makeControl(document.getElementById('g-grid'), { key: 'regionSize', label: 'Region size', min: 0.2, max: 1, step: 0.01 });
+
+    makeControl(document.getElementById('g-pixgrad'), { key: 'gradStrength', label: 'Gradient strength', min: 0, max: 1, step: 0.01 });
+    makeControl(document.getElementById('g-pixgrad'), { key: 'gradContrast', label: 'Gradient contrast', min: 0.2, max: 3, step: 0.01 });
+    makeControl(document.getElementById('g-pixgrad'), { key: 'gradDirection', label: 'Gradient direction', min: 0, max: 360, step: 1, decimals: 0, suffix: '°' });
+    makeControl(document.getElementById('g-pixgrad'), { key: 'alpha', label: 'Pixel opacity', min: 0.05, max: 1, step: 0.01 });
+
+    makeControl(document.getElementById('g-vis'), { key: 'backdrop', label: 'Source visible behind', min: 0, max: 1, step: 0.01 });
+    makeControl(document.getElementById('g-vis'), { key: 'imageBlur', label: 'Image blur', min: 0, max: 60, step: 1, decimals: 0, suffix: 'px' });
+    makeControl(document.getElementById('g-vis'), { key: 'softness', label: 'Palette softness', min: 0.2, max: 1.4, step: 0.01 });
+
+    makeControl(document.getElementById('g-motion'), { key: 'speed', label: 'Base speed', min: 0, max: 2, step: 0.01 });
+    makeControl(document.getElementById('g-motion'), { key: 'pixelRotation', label: 'Pixel rotation', min: 0, max: 2, step: 0.01 });
+
+    makeControl(document.getElementById('g-finish'), { key: 'grain', label: 'Grain', min: 0, max: 1, step: 0.01 });
+
+    // ── Color picker UI ───────────────────────────────────────
     const paletteList = document.getElementById('palette-list');
     const addColorBtn = document.getElementById('add-color');
-
     function renderPaletteUI() {
       paletteList.innerHTML = '';
       state.palette.forEach((c, i) => {
         const row = document.createElement('div');
         row.className = 'palette-row';
-
         const swatch = document.createElement('label');
         swatch.className = 'swatch-sm';
         swatch.style.background = c;
         const colorInput = document.createElement('input');
-        colorInput.type = 'color';
-        colorInput.value = c;
+        colorInput.type = 'color'; colorInput.value = c;
         swatch.appendChild(colorInput);
-
         const hex = document.createElement('input');
-        hex.type = 'text';
-        hex.className = 'hex-input';
-        hex.value = c.toUpperCase();
-        hex.maxLength = 7;
-        hex.spellcheck = false;
-
+        hex.type = 'text'; hex.className = 'hex-input'; hex.value = c.toUpperCase();
+        hex.maxLength = 7; hex.spellcheck = false;
         const rm = document.createElement('button');
-        rm.className = 'rm';
-        rm.type = 'button';
-        rm.textContent = '×';
-        rm.title = 'Remove color';
-        rm.disabled = state.palette.length <= 2;
-
-        colorInput.addEventListener('input', (e) => {
-          const v = e.target.value;
-          state.palette[i] = v;
-          swatch.style.background = v;
-          hex.value = v.toUpperCase();
+        rm.className = 'rm'; rm.type = 'button'; rm.textContent = '×';
+        rm.title = 'Remove color'; rm.disabled = state.palette.length <= 2;
+        colorInput.addEventListener('input', e => {
+          state.palette[i] = e.target.value; swatch.style.background = e.target.value; hex.value = e.target.value.toUpperCase();
         });
-        hex.addEventListener('input', (e) => {
-          let v = e.target.value.trim();
-          if (!v.startsWith('#')) v = '#' + v;
-          if (/^#[0-9A-Fa-f]{6}$/.test(v)) {
-            state.palette[i] = v;
-            swatch.style.background = v;
-            colorInput.value = v;
-          }
+        hex.addEventListener('input', e => {
+          let v = e.target.value.trim(); if (!v.startsWith('#')) v = '#' + v;
+          if (/^#[0-9A-Fa-f]{6}$/.test(v)) { state.palette[i] = v; swatch.style.background = v; colorInput.value = v; }
         });
-        rm.addEventListener('click', () => {
-          state.palette.splice(i, 1);
-          renderPaletteUI();
-        });
-
-        row.appendChild(swatch);
-        row.appendChild(hex);
-        row.appendChild(rm);
+        rm.addEventListener('click', () => { state.palette.splice(i, 1); renderPaletteUI(); });
+        row.appendChild(swatch); row.appendChild(hex); row.appendChild(rm);
         paletteList.appendChild(row);
       });
       addColorBtn.disabled = state.palette.length >= 8;
     }
     renderPaletteUI();
-
     addColorBtn.addEventListener('click', () => {
       if (state.palette.length >= 8) return;
-      // Pick a sensible new color — interpolate between last two
-      const last = state.palette[state.palette.length - 1];
-      state.palette.push(last);
+      state.palette.push(state.palette[state.palette.length - 1]);
       renderPaletteUI();
     });
 
-    // ── Source switcher ──────────────────────────────────────
+    // ── Source switcher ───────────────────────────────────────
     const tabPalette = document.getElementById('src-palette');
     const tabImage = document.getElementById('src-image');
     const paletteUI = document.getElementById('palette-ui');
     const imageUI = document.getElementById('image-ui');
     const imageMotionRow = document.getElementById('image-motion-row');
-
     function setSource(s) {
       state.source = s;
       tabPalette.setAttribute('aria-pressed', s === 'palette');
@@ -519,61 +401,30 @@
     tabPalette.addEventListener('click', () => setSource('palette'));
     tabImage.addEventListener('click', () => setSource('image'));
 
-    // ── Image upload ─────────────────────────────────────────
+    // ── Image upload ──────────────────────────────────────────
     const fileInput = document.getElementById('file-input');
     const fileDrop = document.getElementById('file-drop');
     const filePreview = document.getElementById('file-preview');
     const filePreviewImg = document.getElementById('file-preview-img');
-
     function loadImageFile(file) {
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         const img = new Image();
-        img.onload = () => {
-          state.image = img;
-          filePreviewImg.src = img.src;
-          filePreview.classList.add('is-set');
-        };
+        img.onload = () => { state.image = img; filePreviewImg.src = img.src; filePreview.classList.add('is-set'); };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
-    fileInput.addEventListener('change', (e) => loadImageFile(e.target.files[0]));
-    ['dragenter', 'dragover'].forEach(ev =>
-      fileDrop.addEventListener(ev, (e) => { e.preventDefault(); fileDrop.classList.add('is-drag'); }));
-    ['dragleave', 'drop'].forEach(ev =>
-      fileDrop.addEventListener(ev, (e) => { e.preventDefault(); fileDrop.classList.remove('is-drag'); }));
-    fileDrop.addEventListener('drop', (e) => {
-      if (e.dataTransfer.files[0]) loadImageFile(e.dataTransfer.files[0]);
-    });
+    fileInput.addEventListener('change', e => loadImageFile(e.target.files[0]));
+    ['dragenter', 'dragover'].forEach(ev => fileDrop.addEventListener(ev, e => { e.preventDefault(); fileDrop.classList.add('is-drag'); }));
+    ['dragleave', 'drop'].forEach(ev => fileDrop.addEventListener(ev, e => { e.preventDefault(); fileDrop.classList.remove('is-drag'); }));
+    fileDrop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) loadImageFile(e.dataTransfer.files[0]); });
 
-    // ── Bindings ──────────────────────────────────────────────
-    function bindRange(id, key, label, suffix = '') {
-      const el = document.getElementById(id);
-      const val = document.getElementById(label);
-      const isInt = !el.step || el.step === '1';
-      el.addEventListener('input', (e) => {
-        const v = isInt ? parseInt(e.target.value, 10) : parseFloat(e.target.value);
-        state[key] = v;
-        val.textContent = (isInt ? v : v.toFixed(2)) + suffix;
-      });
-    }
-    bindRange('region-size', 'regionSize', 'v-region-size');
-    bindRange('density', 'density', 'v-density');
-    bindRange('cell', 'cell', 'v-cell');
-    bindRange('layers', 'layers', 'v-layers');
-    bindRange('alpha', 'alpha', 'v-alpha');
-    bindRange('angle', 'pixelAngle', 'v-angle', '°');
-    bindRange('speed', 'speed', 'v-speed');
-    bindRange('pixel-rot', 'pixelRotation', 'v-pixel-rot');
-    bindRange('soft', 'soft', 'v-soft');
-    bindRange('grain', 'grain', 'v-grain');
-
-    document.getElementById('region').addEventListener('change', (e) => state.region = e.target.value);
-    document.getElementById('base-motion').addEventListener('change', (e) => state.baseMotion = e.target.value);
-    document.getElementById('aspect').addEventListener('change', (e) => { state.aspect = e.target.value; resize(); });
-
+    // ── Selects + toggle ──────────────────────────────────────
+    document.getElementById('region').addEventListener('change', e => state.region = e.target.value);
+    document.getElementById('base-motion').addEventListener('change', e => state.baseMotion = e.target.value);
+    document.getElementById('aspect').addEventListener('change', e => { state.aspect = e.target.value; resize(); });
     const imageMotionSwitch = document.getElementById('image-motion');
     function toggleImageMotion() {
       state.imageMotion = !state.imageMotion;
@@ -581,11 +432,9 @@
       imageMotionSwitch.setAttribute('aria-checked', state.imageMotion);
     }
     imageMotionSwitch.addEventListener('click', toggleImageMotion);
-    imageMotionSwitch.addEventListener('keydown', (e) => {
-      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleImageMotion(); }
-    });
+    imageMotionSwitch.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleImageMotion(); } });
 
-    // Randomize: new seed + (palette mode) new harmonious palette
+    // ── Randomize / export ────────────────────────────────────
     document.getElementById('randomize').addEventListener('click', () => {
       state.seed = Math.floor(Math.random() * 1e6);
       if (state.source === 'palette') {
@@ -601,7 +450,6 @@
         renderPaletteUI();
       }
     });
-
     function hslToHex(h, s, l) {
       s /= 100; l /= 100;
       const k = n => (n + h / 30) % 12;
@@ -610,7 +458,6 @@
       const to255 = v => Math.round(255 * v).toString(16).padStart(2, '0');
       return `#${to255(f(0))}${to255(f(8))}${to255(f(4))}`;
     }
-
     document.getElementById('export').addEventListener('click', () => {
       const a = document.createElement('a');
       a.download = `pixel-gradient-${Date.now()}.png`;
@@ -618,10 +465,22 @@
       a.click();
     });
 
+    // ── Sizing ────────────────────────────────────────────────
+    let grainCanvas = null;
+    function resize() {
+      const [a, b] = state.aspect.split(':').map(Number);
+      const long = 1200;
+      const w = a >= b ? long : Math.round(long * a / b);
+      const h = b > a ? long : Math.round(long * b / a);
+      canvas.width = w; canvas.height = h;
+      base.width = Math.round(w / 2);
+      base.height = Math.round(h / 2);
+      grainCanvas = null;
+    }
+
     // ── Base layer ────────────────────────────────────────────
     function drawBase(t) {
       const w = base.width, h = base.height;
-
       if (state.source === 'image' && state.image) {
         bctx.filter = 'none';
         bctx.fillStyle = '#000';
@@ -636,36 +495,27 @@
         }
         const r = Math.max(w / img.width, h / img.height) * z;
         const iw = img.width * r, ih = img.height * r;
+        if (state.imageBlur > 0) bctx.filter = `blur(${state.imageBlur / 2}px)`;
         bctx.drawImage(img, (w - iw) / 2 + dx, (h - ih) / 2 + dy, iw, ih);
-        // Soft blur for cleaner sampling
-        if (state.soft > 0.25) {
-          bctx.filter = `blur(${Math.round(6 * state.soft)}px)`;
-          bctx.drawImage(base, 0, 0);
-          bctx.filter = 'none';
-        }
+        bctx.filter = 'none';
         return;
       }
-
-      // Palette: animated radial / orbit / static
+      // Palette base
       bctx.fillStyle = state.palette[0];
       bctx.fillRect(0, 0, w, h);
-
       const motion = state.baseMotion;
-      const fixedT = state.seed * 1.21; // stable "frozen" phase for static
+      const fixedT = state.seed * 1.21;
       const tt = motion === 'static' ? fixedT : t * 0.0005 * state.speed;
-      const soft = state.soft;
+      const soft = state.softness;
       const cs = state.palette.slice(1);
-
       cs.forEach((color, i) => {
         const phase = i * 1.7 + state.seed * 0.001;
         let cx, cy;
         if (motion === 'orbit') {
-          const orbitR = 0.32 + 0.05 * i;
-          const omega = 1 + i * 0.18;
+          const orbitR = 0.32 + 0.05 * i, omega = 1 + i * 0.18;
           cx = w * (0.5 + orbitR * Math.cos(tt * omega + phase));
           cy = h * (0.5 + orbitR * Math.sin(tt * omega + phase));
         } else {
-          // radial drift (and static reuses the same equations but with fixedT)
           cx = w * (0.5 + 0.45 * Math.sin(tt * (0.6 + i * 0.2) + phase));
           cy = h * (0.5 + 0.45 * Math.cos(tt * (0.5 + i * 0.23) + phase * 1.3));
         }
@@ -682,94 +532,104 @@
 
     // ── Sampling ──────────────────────────────────────────────
     let baseData = null;
-    function refreshSamples() {
-      baseData = bctx.getImageData(0, 0, base.width, base.height);
-    }
+    function refreshSamples() { baseData = bctx.getImageData(0, 0, base.width, base.height); }
     function sample(nx, ny) {
-      if (!baseData) return [255, 255, 255, 255];
+      if (!baseData) return [255, 255, 255];
       const x = Math.max(0, Math.min(base.width - 1, Math.floor(nx * base.width)));
       const y = Math.max(0, Math.min(base.height - 1, Math.floor(ny * base.height)));
       const i = (y * base.width + x) * 4;
       const d = baseData.data;
-      return [d[i], d[i + 1], d[i + 2], d[i + 3]];
+      return [d[i], d[i + 1], d[i + 2]];
     }
-    const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+    const cl = v => Math.max(0, Math.min(255, v));
+    const rgba = (c, a) => `rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
 
-    // ── Region mask ───────────────────────────────────────────
     function inRegion(nx, ny) {
       if (state.region === 'full') return true;
-      const dx = nx - 0.5, dy = ny - 0.5;
-      const half = state.regionSize / 2;
+      const dx = nx - 0.5, dy = ny - 0.5, half = state.regionSize / 2;
       if (state.region === 'square') return Math.abs(dx) <= half && Math.abs(dy) <= half;
-      if (state.region === 'disc')  return Math.sqrt(dx*dx + dy*dy) <= half;
+      if (state.region === 'disc') return Math.sqrt(dx * dx + dy * dy) <= half;
       return true;
     }
 
-    // ── Pixels ────────────────────────────────────────────────
+    // ── Pixels — single even grid, each a directional gradient ─
     function drawPixels(t) {
       const W = canvas.width, H = canvas.height;
+      const cellPx = state.cell;
+      const cols = Math.ceil(W / cellPx);
+      const rows = Math.ceil(H / cellPx);
+      const offsetX = (W - cols * cellPx) / 2;
+      const offsetY = (H - rows * cellPx) / 2;
 
-      // Frame-time angle (degrees) — rotates uniformly when pixelRotation > 0
-      const angleDeg = state.pixelAngle + (state.pixelRotation * t * 0.04);
+      const angleDeg = state.gradDirection + (state.pixelRotation * t * 0.04);
       const angleRad = angleDeg * Math.PI / 180;
       const cosA = Math.cos(angleRad), sinA = Math.sin(angleRad);
 
-      for (let L = 0; L < state.layers; L++) {
-        const layerRand = mulberry32(state.seed + L * 9919);
-        const cellPx = state.cell * (1 + L * 0.10);
-        const cols = Math.ceil(W / cellPx);
-        const rows = Math.ceil(H / cellPx);
-        const layerAlpha = state.alpha * (1 - L * 0.12);
+      // Sampling offset grows with gradient strength → wider internal color spread
+      const sOff = state.gradStrength * 0.18;
+      const k = state.gradContrast;
+      const a = state.alpha;
+      const rand = mulberry32(state.seed);
 
-        // Center the grid so layer offsets don't drift
-        const offsetX = (W - cols * cellPx) / 2;
-        const offsetY = (H - rows * cellPx) / 2;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const ncx = (c + 0.5) / cols;
+          const ncy = (r + 0.5) / rows;
+          if (!inRegion(ncx, ncy)) { rand(); continue; }
+          if (rand() > state.density) continue;
 
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const ncx = (c + 0.5) / cols;
-            const ncy = (r + 0.5) / rows;
-            if (!inRegion(ncx, ncy)) { layerRand(); continue; }
-            if (layerRand() > state.density) continue;
+          const x = offsetX + c * cellPx;
+          const y = offsetY + r * cellPx;
 
-            // Strict grid — no jitter
-            const x = offsetX + c * cellPx;
-            const y = offsetY + r * cellPx;
-            const sz = cellPx;
+          // Two samples either side of the cell center along the gradient axis
+          const ax = Math.max(0, Math.min(1, ncx - cosA * sOff));
+          const ay = Math.max(0, Math.min(1, ncy - sinA * sOff));
+          const bx = Math.max(0, Math.min(1, ncx + cosA * sOff));
+          const by = Math.max(0, Math.min(1, ncy + sinA * sOff));
+          let c1 = sample(ax, ay);
+          let c2 = sample(bx, by);
 
-            // Two samples along the uniform angle → internal directional gradient
-            const sample1 = sample(ncx, ncy);
-            const off = 0.05;
-            const sx2 = Math.max(0, Math.min(1, ncx + cosA * off));
-            const sy2 = Math.max(0, Math.min(1, ncy + sinA * off));
-            const sample2 = sample(sx2, sy2);
-
-            const gx2 = x + cosA * sz;
-            const gy2 = y + sinA * sz;
-            const g = ctx.createLinearGradient(x, y, gx2, gy2);
-            g.addColorStop(0, rgba(sample1, layerAlpha));
-            g.addColorStop(1, rgba(sample2, layerAlpha));
-            ctx.fillStyle = g;
-            ctx.fillRect(x, y, sz, sz);
+          // Contrast: push the two stops apart from their midpoint
+          if (k !== 1) {
+            const m0 = (c1[0] + c2[0]) / 2, m1 = (c1[1] + c2[1]) / 2, m2 = (c1[2] + c2[2]) / 2;
+            c1 = [cl(m0 + (c1[0] - m0) * k), cl(m1 + (c1[1] - m1) * k), cl(m2 + (c1[2] - m2) * k)];
+            c2 = [cl(m0 + (c2[0] - m0) * k), cl(m1 + (c2[1] - m1) * k), cl(m2 + (c2[2] - m2) * k)];
           }
+
+          // Internal linear gradient across the cell along the axis
+          const g = ctx.createLinearGradient(
+            x + (0.5 - cosA * 0.5) * cellPx, y + (0.5 - sinA * 0.5) * cellPx,
+            x + (0.5 + cosA * 0.5) * cellPx, y + (0.5 + sinA * 0.5) * cellPx
+          );
+          g.addColorStop(0, rgba(c1, a));
+          g.addColorStop(1, rgba(c2, a));
+          ctx.fillStyle = g;
+          ctx.fillRect(x, y, cellPx, cellPx);
         }
       }
     }
 
+    function mulberry32(a) {
+      return function () {
+        a |= 0; a = a + 0x6D2B79F5 | 0;
+        let t = a;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
     // ── Grain ─────────────────────────────────────────────────
-    let grainCanvas = null;
     function ensureGrain() {
       if (grainCanvas && grainCanvas.width === canvas.width && grainCanvas.height === canvas.height) return;
       grainCanvas = document.createElement('canvas');
-      grainCanvas.width = canvas.width;
-      grainCanvas.height = canvas.height;
+      grainCanvas.width = canvas.width; grainCanvas.height = canvas.height;
       const gctx = grainCanvas.getContext('2d');
       const id = gctx.createImageData(canvas.width, canvas.height);
       const d = id.data;
       for (let i = 0; i < d.length; i += 4) {
         const n = (Math.random() * 255) | 0;
-        d[i] = d[i + 1] = d[i + 2] = n;
-        d[i + 3] = 255;
+        d[i] = d[i + 1] = d[i + 2] = n; d[i + 3] = 255;
       }
       gctx.putImageData(id, 0, 0);
     }
@@ -787,9 +647,16 @@
     function frame(t) {
       drawBase(t);
       refreshSamples();
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(base, 0, 0, canvas.width, canvas.height);
+      // Clear, then optionally lay down the (blurred) source behind the pixels
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (state.backdrop > 0.001) {
+        ctx.save();
+        ctx.globalAlpha = state.backdrop;
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(base, 0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      }
       drawPixels(t);
       drawGrain();
       requestAnimationFrame(frame);
