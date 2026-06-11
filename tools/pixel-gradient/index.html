@@ -483,8 +483,7 @@
       const w = base.width, h = base.height;
       if (state.source === 'image' && state.image) {
         bctx.filter = 'none';
-        bctx.fillStyle = '#000';
-        bctx.fillRect(0, 0, w, h);
+        bctx.clearRect(0, 0, w, h);
         const img = state.image;
         let z = 1, dx = 0, dy = 0;
         if (state.imageMotion) {
@@ -493,9 +492,16 @@
           dx = Math.sin(m * 0.85) * w * 0.06;
           dy = Math.cos(m * 0.7) * h * 0.06;
         }
-        const r = Math.max(w / img.width, h / img.height) * z;
+        const blurPx = state.imageBlur / 2;
+        // Overscan: draw the image larger than the canvas by at least the blur
+        // radius on every side, so the blur kernel never reaches empty space
+        // and no dark edge / vignette can bleed in.
+        const margin = blurPx * 2 + 2;
+        const rCover = Math.max(w / img.width, h / img.height);
+        const rNeed = Math.max((w + 2 * margin) / img.width, (h + 2 * margin) / img.height);
+        const r = Math.max(rCover, rNeed) * z;
         const iw = img.width * r, ih = img.height * r;
-        if (state.imageBlur > 0) bctx.filter = `blur(${state.imageBlur / 2}px)`;
+        if (blurPx > 0) bctx.filter = `blur(${blurPx}px)`;
         bctx.drawImage(img, (w - iw) / 2 + dx, (h - ih) / 2 + dy, iw, ih);
         bctx.filter = 'none';
         return;
